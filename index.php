@@ -6,7 +6,9 @@ $age = null;
 $email = null;
 $password = null;
 $phone = null;
+// if (isset($fname) && isset($lname) && isset($password) && isset($phone) && isset($gender) && isset($lavel) && isset($country) && isset($age)) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $fname = addslashes(trim($_POST['fname']));
     $lname = addslashes(trim($_POST['lname']));
     $age = addslashes(trim($_POST['age']));
@@ -15,6 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = addslashes(trim($_POST['phone']));
     $password = addslashes(trim($_POST['password']));
     $gender = addslashes(trim($_POST['gender']));
+    setcookie("user_info[fname]", $fname, strtotime("+1 year"));
+    setcookie("user_info[lname]", $lname, strtotime("+1 year"));
+    setcookie("user_info[age]", $age, strtotime("+1 year"));
+    setcookie("user_info[country]", $country, strtotime("+1 year"));
+    setcookie("user_info[lavel]", $lavel, strtotime("+1 year"));
+    setcookie("user_info[phone]", $phone, strtotime("+1 year"));
+    setcookie("user_info[password]", $password, strtotime("+1 year"));
+    setcookie("user_info[gender]", $gender, strtotime("+1 year"));
 }
 ?>
 <!DOCTYPE html>
@@ -87,8 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
     <div class="user-info">
         <?php
-        if (isset($fname) && isset($lname) && isset($password) && isset($phone) && isset($gender) && isset($lavel) && isset($country) && isset($age)) {
-            echo "
+        echo "
         <table>
         <tr>
             <th>Frist Name</th>
@@ -102,22 +111,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         </tr>
         <tr>
-            <td> $fname</td>
-            <td>$lname</td>
-            <td>$age</td>
-             <td> $country</td>
-            <td>$lavel</td>
-            <td>$phone</td>
-             <td> $gender</td>
-            <td>$password</td>
+            <td>" . $_COOKIE['user_info']['fname'] . "</td>
+            <td>" . $_COOKIE['user_info']['lname'] . "</td>
+            <td>" . $_COOKIE['user_info']['age'] . "</td>
+            <td>" . $_COOKIE['user_info']['country'] . "</td>
+            <td>" . $_COOKIE['user_info']['lavel'] . "</td>
+            <td>" . $_COOKIE['user_info']['phone'] . "</td>
+            <td>" . $_COOKIE['user_info']['password'] . "</td>
+            <td>" . $_COOKIE['user_info']['gender'] . "</td>
+
         </tr>
     </table>";
-        }
+        // }
 
         ?>
 
     </div>
 
 </body>
+<!-- // <td> $fname</td>
+            // <td>$lname</td>
+            // <td>$age</td>
+            //  <td> $country</td>
+            // <td>$lavel</td>
+            // <td>$phone</td>
+            //  <td> $gender</td>
+            // <td>$password</td> -->
 
 </html>
